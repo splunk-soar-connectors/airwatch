@@ -18,6 +18,7 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 **username** | required | string | Basic Auth Username for AirWatch API |
 **password** | required | password | Basic Auth Password for AirWatch API |
 **base_url** | required | string | Base URL for AirWatch API |
+**verify_server_cert** | optional | boolean | Verify server certificate |
 
 ### Supported Actions
 
