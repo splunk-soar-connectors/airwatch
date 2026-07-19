@@ -49,7 +49,7 @@ class AirWatchConnector(BaseConnector):
         return phantom.APP_SUCCESS
 
     def _get_error_message_from_exception(self, e):
-        """ This method is used to get appropriate error message from the exception.
+        """This method is used to get appropriate error message from the exception.
         :param e: Exception object
         :return: error message
         """
@@ -73,9 +73,9 @@ class AirWatchConnector(BaseConnector):
 
         try:
             if error_code in AIRWATCH_ERR_CODE_MSG:
-                error_text = "Error Message: {0}".format(error_msg)
+                error_text = f"Error Message: {error_msg}"
             else:
-                error_text = "Error Code: {0}. Error Message: {1}".format(error_code, error_msg)
+                error_text = f"Error Code: {error_code}. Error Message: {error_msg}"
         except:
             self.debug_print(AIRWATCH_PARSE_ERR_MSG)
             error_text = AIRWATCH_PARSE_ERR_MSG
@@ -189,11 +189,12 @@ class AirWatchConnector(BaseConnector):
         return ret_val
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import pudb
+
     pudb.set_trace()
     if len(sys.argv) < 2:
-        print('No test json specified as input')
+        print("No test json specified as input")
         exit(0)
     with open(sys.argv[1]) as (f):
         in_json = f.read()
