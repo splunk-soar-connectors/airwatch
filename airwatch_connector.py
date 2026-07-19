@@ -1,29 +1,32 @@
 # File: airwatch_connector.py
-# Copyright (c) 2020 Splunk Inc.
+# Copyright (c) 2020-2026 Splunk Inc.
 #
 # Licensed under Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
 
-import phantom.app as phantom
 import json
-import requests
 import sys
+from urllib.parse import quote
+
+import phantom.app as phantom
+import requests
 from phantom.action_result import ActionResult
 from phantom.base_connector import BaseConnector
+
 from airwatch_consts import *
 
 
 class AirWatchConnector(BaseConnector):
-
     def __init__(self):
-        super(AirWatchConnector, self).__init__()
+        super().__init__()
 
         self._tenant = None
         self._username = None
         self._password = None
         self._python_version = None
+        self._verify_server_cert = True
 
     def initialize(self):
-        """ Automatically called by the BaseConnector before the calls to the handle_action function"""
+        """Automatically called by the BaseConnector before the calls to the handle_action function"""
 
         config = self.get_config()
 
@@ -79,34 +82,42 @@ class AirWatchConnector(BaseConnector):
         return error_text
 
     def _get_headers(self):
-        self.save_progress('Trying to get headers')
+        self.save_progress("Trying to get headers")
         # Creating headers
         headers = dict()
-        headers['aw-tenant-code'] = self._tenant
-        headers['Accept'] = "application/json;version=2"
-        headers['Content-Type'] = "application/json"
+        headers["aw-tenant-code"] = self._tenant
+        headers["Accept"] = "application/json;version=2"
+        headers["Content-Type"] = "application/json"
         return headers
 
     def _build_groupadd_body(self, param):
-        self.save_progress('Trying to build body to add a device into the group')
+        self.save_progress("Trying to build body to add a device into the group")
 
         # Fetching the action parameters
-        device_uuid = param.get('device_uuid')
+        device_uuid = param.get("device_uuid")
 
         # Return the body
-        return '[{{"value": "{0}","path": "/smartGroupsOperationV2/devices","op": "add"}}]'.format(device_uuid)
+        return json.dumps(
+            [
+                {
+                    "value": device_uuid,
+                    "path": "/smartGroupsOperationV2/devices",
+                    "op": "add",
+                }
+            ]
+        )
 
     def _build_groupadd_url(self, param):
-        self.save_progress('Trying to build URL to add a device into the group')
+        self.save_progress("Trying to build URL to add a device into the group")
 
         # Fetching the action parameters
-        smartgroup_uuid = param.get('smartgroup_uuid')
+        smartgroup_uuid = quote(str(param.get("smartgroup_uuid")), safe="")
 
         # Return the URL
-        return '{0}/mdm/smartgroups/{1}'.format(self._base_url, smartgroup_uuid)
+        return f"{self._base_url}/mdm/smartgroups/{smartgroup_uuid}"
 
     def _add_to_group(self, param):
-        self.save_progress('Try to add a device into the group')
+        self.save_progress("Try to add a device into the group")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         try:
