@@ -42,6 +42,13 @@
             "required": true,
             "default": "https://cn251.awmdm.com/api",
             "order": 3
+        },
+        "verify_server_cert": {
+            "description": "Verify server certificate",
+            "data_type": "boolean",
+            "required": false,
+            "default": true,
+            "order": 4
         }
     },
     "actions": [
