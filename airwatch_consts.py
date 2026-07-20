@@ -1,11 +1,11 @@
 # File: airwatch_consts.py
-# Copyright (c) 2020 Splunk Inc.
+# Copyright (c) 2020-2026 Splunk Inc.
 #
 # Licensed under Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
 
 # Actio ID constants
-ACTION_ID_TEST = 'test_asset_connectivity'
-ACTION_ID_ADD = 'add_to_group'
+ACTION_ID_TEST = "test_asset_connectivity"
+ACTION_ID_ADD = "add_to_group"
 
 # Error message constants
 AIRWATCH_ERR_CODE_MSG = "Error code unavailable"

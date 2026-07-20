@@ -10,7 +10,7 @@
     "python_version": "3",
     "product_version_regex": ".*",
     "publisher": "Splunk Community",
-    "license": "Copyright (c) 2020 Splunk Inc.",
+    "license": "Copyright (c) 2020-2026 Splunk Inc.",
     "app_version": "1.0.2",
     "utctime_updated": "2020-12-17T10:29:02.000000Z",
     "package_name": "phantom_airwatch",
@@ -42,6 +42,13 @@
             "required": true,
             "default": "https://cn251.awmdm.com/api",
             "order": 3
+        },
+        "verify_server_cert": {
+            "description": "Verify server certificate",
+            "data_type": "boolean",
+            "required": false,
+            "default": true,
+            "order": 4
         }
     },
     "actions": [
