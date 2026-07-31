@@ -1,7 +1,7 @@
 # AirWatch
 
 Publisher: Splunk Community <br>
-Connector Version: 1.0.3 <br>
+Connector Version: 1.0.2 <br>
 Product Vendor: Mhike <br>
 Product Name: AirWatch <br>
 Minimum Product Version: 4.9.39220
